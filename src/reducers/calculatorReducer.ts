@@ -27,12 +27,11 @@ export const types = {
   equal: 'EQUAL',
 };
 
-const calculatorReducer = (state: CalculatorState, action) => {
+const calculatorReducer = (state: CalculatorState, action: any) => {
   const cifra = parseFloat(state.display);
 
   switch (action.type) {
     case types.edit:
-      console.log(state);
       return action.payload === 'del'
         ? {
             ...state,
@@ -55,8 +54,8 @@ const calculatorReducer = (state: CalculatorState, action) => {
           };
 
     case types.equal:
-      console.log(state);
-      console.log(state.numbers.concat(state.display));
+      // console.log(state);
+      // console.log(state.numbers.concat(state.display));
       return {
         ...state,
         // display: eval(state.allOperations.concat(state.display)),

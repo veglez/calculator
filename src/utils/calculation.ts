@@ -1,4 +1,12 @@
-const operation = {
+interface Operation {
+  [key: string]: any;
+  sum: (a: number, b: number) => number;
+  sub: (a: number, b: number) => number;
+  multiply: (a: number, b: number) => number;
+  division: (a: number, b: number) => number;
+}
+
+const operation: Operation = {
   sum: (a: number, b: number) => a + b,
   sub: (a: number, b: number) => a - b,
   multiply: (a: number, b: number) => a * b,
@@ -22,7 +30,7 @@ const getKeyOperation = (operatorSymbol: string) => {
 };
 
 const resolveBinary = (
-  operator,
+  operator: any,
   indexOperator: number,
   numbers: Array<number>
 ) => {
