@@ -14,7 +14,7 @@ module.exports = {
     clean: true,
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
   module: {
     rules: [
@@ -26,6 +26,11 @@ module.exports = {
       {
         test: /\.(css|s[ac]ss)$/i,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+      },
+      {
+        test: /\.tsx?$/i,
+        exclude: /node_modules/,
+        use: 'ts-loader',
       },
     ],
   },
