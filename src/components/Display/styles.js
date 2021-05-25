@@ -14,4 +14,8 @@ export const Screen = styled.div`
 
 export const Value = styled.p`
   overflow: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;

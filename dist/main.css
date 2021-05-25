@@ -1,0 +1,2 @@
+@import url(https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap);
+*{margin:0;padding:0;box-sizing:border-box}:root{--font-size-numbers: 32px;--family: "spartan", "Times New Roman", sans-serif;--weight1: 700}html{font-family:var(--family)}#app{font-size:var(--font-size-numbers)}

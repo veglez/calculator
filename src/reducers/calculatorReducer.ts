@@ -68,6 +68,8 @@ const calculatorReducer = (state: CalculatorState, action: any) => {
           ...state.latestOperations,
           parseFloat(state.allOperations + state.display),
         ],
+        numbers: [],
+        operators: [],
       };
 
     default:

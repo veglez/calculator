@@ -1,0 +1,42 @@
+{
+  "icons": [
+    {
+      "src": "/icon_512x512.d0c9736547e9b19cf755d73a13e3e26a.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon_384x384.e325230752a951dada23ef0d18765c07.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon_256x256.8102e75ef4965d65d019911ed6b6ea3c.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon_192x192.b53f0959a8f452da5e85045b1f078a01.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon_128x128.6f05928729f94dc567846cb44de4dedb.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon_96x96.5d11634860cc1fbd9fff9fdb17d4326d.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    }
+  ],
+  "name": "Calculator - a simple calculator with theme switcher",
+  "short_name": "simple calculator",
+  "orientation": "portrait",
+  "display": "standalone",
+  "start_url": ".",
+  "description": "a calculator with 3 differents themes",
+  "background_color": "#fff",
+  "theme_color": "#f2f2f2"
+}
