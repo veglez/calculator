@@ -40,7 +40,7 @@ const resolveBinary = (
   const b = numbers[indexOperator + 1];
   const result = operator(a, b);
 
-  cN.splice(indexOperator, 2, result.toFixed(3));
+  cN.splice(indexOperator, 2, result);
 
   return cN;
 };
