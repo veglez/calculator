@@ -5,6 +5,7 @@ interface CalculatorState {
   latestOperations: Array<number>;
   allOperations: string;
   display: string;
+  equal: boolean;
 }
 
 interface Action {
@@ -18,6 +19,7 @@ export const initialState: CalculatorState = {
   latestOperations: [],
   allOperations: '',
   display: '',
+  equal: false,
 };
 
 export const types = {
@@ -32,7 +34,9 @@ const calculatorReducer = (state: CalculatorState, action: any) => {
 
   switch (action.type) {
     case types.edit:
-      return action.payload === 'del'
+      return action.payload === 'del' ||
+        action.payload === 'Backspace' ||
+        action.payload === 'Delete'
         ? {
             ...state,
             display: state.display.substring(0, state.display.length - 1),
@@ -54,8 +58,6 @@ const calculatorReducer = (state: CalculatorState, action: any) => {
           };
 
     case types.equal:
-      // console.log(state);
-      // console.log(state.numbers.concat(state.display));
       return {
         ...state,
         // display: eval(state.allOperations.concat(state.display)),
@@ -70,10 +72,13 @@ const calculatorReducer = (state: CalculatorState, action: any) => {
         ],
         numbers: [],
         operators: [],
+        equal: true,
       };
 
     default:
-      return { ...state, display: state.display.concat(action.payload) };
+      return state.equal
+        ? { ...state, display: action.payload, equal: false }
+        : { ...state, display: state.display.concat(action.payload) };
   }
 };
 

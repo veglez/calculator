@@ -14,6 +14,56 @@ const App = () => {
   const [themeIndex, setThemeIndex] = useState(0);
   const [state, dispatch] = useReducer(calculatorReducer, initialState);
 
+  const keyboard = React.useRef(null);
+
+  const listener = (e) => {
+    let pressedKey = e.key;
+    let tipo = 'number';
+
+    switch (pressedKey) {
+      case 'Enter':
+        tipo = types.equal;
+        dispatch({ type: tipo, payload: pressedKey });
+        break;
+      case 'Delete':
+      case 'Backspace':
+        tipo = types.edit;
+        dispatch({ type: tipo, payload: pressedKey });
+        break;
+      case '+':
+      case '-':
+      case '/':
+      case '*':
+        tipo = types.operator;
+        dispatch({ type: tipo, payload: pressedKey });
+        break;
+      case '1':
+      case '2':
+      case '3':
+      case '4':
+      case '5':
+      case '6':
+      case '7':
+      case '8':
+      case '9':
+      case '0':
+      case '.':
+        tipo = types.number;
+        dispatch({ type: tipo, payload: pressedKey });
+        break;
+      default:
+        console.log(pressedKey);
+    }
+  };
+
+  React.useEffect(() => {
+    keyboard.current.focus();
+    document.body.addEventListener('keydown', listener);
+    return () => {
+      document.body.removeEventListener('keydown', listener);
+    };
+  }, []);
+
   const handleInput = (e) => {
     const index = e.target.value;
     setThemeIndex(index);
@@ -47,7 +97,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={pallete[themeIndex]}>
-      <Calculator>
+      <Calculator ref={keyboard}>
         <Header>
           <h1>Calc</h1>
           <ThemeSwitcher handleInput={handleInput} />

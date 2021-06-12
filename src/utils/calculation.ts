@@ -20,6 +20,7 @@ const getKeyOperation = (operatorSymbol: string) => {
     case '-':
       return 'sub';
     case 'x':
+    case '*':
       return 'multiply';
     case '/':
       return 'division';
@@ -39,7 +40,7 @@ const resolveBinary = (
   const b = numbers[indexOperator + 1];
   const result = operator(a, b);
 
-  cN.splice(indexOperator, 2, result);
+  cN.splice(indexOperator, 2, result.toFixed(3));
 
   return cN;
 };
@@ -51,10 +52,11 @@ const results = (
 ) => {
   let numbers = [...numbersArray];
   let opArr = [...operatorsArray];
-  const hierarchy = ['x', '/', '+', '-'];
+  const hierarchy = ['*', 'x', '/', '+', '-'];
 
   hierarchy.forEach((oper) => {
     let index = opArr.indexOf(oper);
+    console.log(`el index de asterisco es: `, index);
     while (index !== -1) {
       let operKey = getKeyOperation(oper);
       numbers = resolveBinary(operation[operKey], index, numbers);
