@@ -31,6 +31,7 @@ export const types = {
 
 const calculatorReducer = (state: CalculatorState, action: any) => {
   const cifra = parseFloat(state.display);
+  // let symbol = action.payload
 
   switch (action.type) {
     case types.edit:
@@ -49,35 +50,39 @@ const calculatorReducer = (state: CalculatorState, action: any) => {
         : {
             ...state,
             numbers: [...state.numbers, parseFloat(state.display)],
-            operators: [...state.operators, action.payload],
+            operators: [
+              ...state.operators,
+              action.payload === '*' ? 'x' : action.payload,
+            ],
             allOperations: state.allOperations.concat(
               state.display,
-              action.payload
+              action.payload === '*' ? 'x' : action.payload
             ),
             display: '',
           };
 
     case types.equal:
-      return {
-        ...state,
-        // display: eval(state.allOperations.concat(state.display)),
-        display: result(
-          state.numbers.concat(parseFloat(state.display)),
-          state.operators
-        ),
-        allOperations: '',
-        latestOperations: [
-          ...state.latestOperations,
-          parseFloat(state.allOperations + state.display),
-        ],
-        numbers: [],
-        operators: [],
-        equal: true,
-      };
+      return state.equal
+        ? state
+        : {
+            ...state,
+            allOperations: state.allOperations.concat(state.display, '  =  '),
+            display: result(
+              state.numbers.concat(parseFloat(state.display)),
+              state.operators
+            ),
+            latestOperations: [
+              ...state.latestOperations,
+              parseFloat(state.allOperations + state.display),
+            ],
+            numbers: [],
+            operators: [],
+            equal: true,
+          };
 
     default:
       return state.equal
-        ? { ...state, display: action.payload, equal: false }
+        ? { ...state, display: action.payload, equal: false, allOperations: '' }
         : { ...state, display: state.display.concat(action.payload) };
   }
 };

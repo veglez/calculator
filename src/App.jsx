@@ -2,7 +2,7 @@ import React, { useState, useReducer } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { pallete } from './context/theme';
 import ThemeSwitcher from './components/ThemeSwitcher/ThemeSwitcher';
-import { Calculator, Header } from './appStyles';
+import { Calculator, Header, OperationsDisplay } from './appStyles';
 import Display from './components/Display/Display';
 import Keypad from './components/Keypad/Keypad';
 import calculatorReducer, {
@@ -16,7 +16,7 @@ const App = () => {
 
   const keyboard = React.useRef(null);
 
-  const listener = (e) => {
+  const handleKeyboard = (e) => {
     let pressedKey = e.key;
     let tipo = 'number';
 
@@ -27,6 +27,7 @@ const App = () => {
         break;
       case 'Delete':
       case 'Backspace':
+      case 'Escape':
         tipo = types.edit;
         dispatch({ type: tipo, payload: pressedKey });
         break;
@@ -58,9 +59,9 @@ const App = () => {
 
   React.useEffect(() => {
     keyboard.current.focus();
-    document.body.addEventListener('keydown', listener);
+    document.body.addEventListener('keydown', handleKeyboard);
     return () => {
-      document.body.removeEventListener('keydown', listener);
+      document.body.removeEventListener('keydown', handleKeyboard);
     };
   }, []);
 
@@ -102,7 +103,7 @@ const App = () => {
           <h1>Calc</h1>
           <ThemeSwitcher handleInput={handleInput} />
         </Header>
-        <p style={{ minHeight: 38 }}>{state.allOperations}</p>
+        <OperationsDisplay>{state.allOperations}</OperationsDisplay>
         <Display value={state.display} />
         <Keypad handleClick={handleClick} />
       </Calculator>

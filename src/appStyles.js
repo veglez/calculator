@@ -4,8 +4,9 @@ export const Calculator = styled.div`
   display: flex;
   flex-direction: column;
   gap: 40px;
-  width: 90vw;
-  max-width: 470px;
+  width: min(100%, 480px);
+  height: min(100vh, auto);
+  /* max-width: 470px; */
   margin: 50px auto;
   border: 1px solid steelblue;
   color: ${(props) => props.theme.text.main};
@@ -21,5 +22,15 @@ export const Header = styled.header`
   h1 {
     font-size: 1em;
     text-transform: lowercase;
+  }
+`;
+
+export const OperationsDisplay = styled.p`
+  overflow-x: scroll;
+  min-height: 38px;
+
+  &::-webkit-scrollbar {
+    visibility: hidden;
+    display: none;
   }
 `;

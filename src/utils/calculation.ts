@@ -56,7 +56,6 @@ const results = (
 
   hierarchy.forEach((oper) => {
     let index = opArr.indexOf(oper);
-    console.log(`el index de asterisco es: `, index);
     while (index !== -1) {
       let operKey = getKeyOperation(oper);
       numbers = resolveBinary(operation[operKey], index, numbers);

@@ -18,8 +18,9 @@
           navigator.serviceWorker
             .register('/service-worker.js')
             .then((resitration) => {
-              console.log('sw registrado').catch((e) => console.log(e));
-            });
+              console.log('sw registrado');
+            })
+            .catch((e) => console.log(e));
         });
       }
     </script>
