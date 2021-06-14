@@ -31,7 +31,7 @@ export const types = {
 
 const calculatorReducer = (state: CalculatorState, action: any) => {
   const cifra = parseFloat(state.display);
-  // let symbol = action.payload
+  let symbol = action.payload === '*' ? 'x' : action.payload;
 
   switch (action.type) {
     case types.edit:
@@ -45,19 +45,23 @@ const calculatorReducer = (state: CalculatorState, action: any) => {
         : initialState;
 
     case types.operator:
-      return isNaN(cifra)
+      console.log(action.payload);
+      return isNaN(cifra) || action.payload === '0'
         ? { ...state } //si display vacio entonces error
+        : state.equal
+        ? {
+            ...state,
+            equal: false,
+            numbers: [...state.numbers, parseFloat(state.display)],
+            operators: [...state.operators, symbol],
+            allOperations: state.display + symbol,
+            display: '',
+          }
         : {
             ...state,
             numbers: [...state.numbers, parseFloat(state.display)],
-            operators: [
-              ...state.operators,
-              action.payload === '*' ? 'x' : action.payload,
-            ],
-            allOperations: state.allOperations.concat(
-              state.display,
-              action.payload === '*' ? 'x' : action.payload
-            ),
+            operators: [...state.operators, symbol],
+            allOperations: state.allOperations.concat(state.display, symbol),
             display: '',
           };
 
@@ -81,7 +85,9 @@ const calculatorReducer = (state: CalculatorState, action: any) => {
           };
 
     default:
-      return state.equal
+      return action.payload === '.' && state.display.includes('.')
+        ? state
+        : state.equal
         ? { ...state, display: action.payload, equal: false, allOperations: '' }
         : { ...state, display: state.display.concat(action.payload) };
   }
