@@ -66,7 +66,9 @@ const calculatorReducer = (state: CalculatorState, action: any) => {
           };
 
     case types.equal:
-      return state.equal
+      return state.equal ||
+        !state.display ||
+        (state.display && state.operators.length === 0)
         ? state
         : {
             ...state,

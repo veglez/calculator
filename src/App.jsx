@@ -53,7 +53,6 @@ const App = () => {
         dispatch({ type: tipo, payload: pressedKey });
         break;
       default:
-        console.log(pressedKey);
     }
   };
 
