@@ -60,7 +60,7 @@ const results = (
     let operKey2 = getKeyOperation(opArr[1]);
     //se evalua la jerarquia de la operación multiplicación | div > suma | resta
     if (operation[operKey].level < operation[operKey2].level) {
-      numbers = resolveBinary(operation[operKey].function, 1, numbers);
+      numbers = resolveBinary(operation[operKey2].function, 1, numbers);
       opArr.splice(1, 1); //se muta el array de operandos, se elimina el que acaba de usarse
     } else {
       numbers = resolveBinary(operation[operKey].function, 0, numbers);

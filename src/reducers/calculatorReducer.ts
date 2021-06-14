@@ -45,7 +45,6 @@ const calculatorReducer = (state: CalculatorState, action: any) => {
         : initialState;
 
     case types.operator:
-      console.log(action.payload);
       return isNaN(cifra) || action.payload === '0'
         ? { ...state } //si display vacio entonces error
         : state.equal
